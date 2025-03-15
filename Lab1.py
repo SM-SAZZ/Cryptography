@@ -9,6 +9,7 @@
 import math
 
 def greatest_common_divider(a, b):
+    """Нахождение НОДа"""
     d = b // a
     r = b - a * d
     
@@ -20,6 +21,7 @@ def greatest_common_divider(a, b):
     return greatest_common_divider(r, a)
 
 def euler(n):
+    """Нахождение значения функции Эйлера"""
     res = n
     p = 2
 
@@ -37,17 +39,20 @@ def euler(n):
     return res
 
 def solve_equasion(a, b, p):
+    """Решение сравнения"""
     print(f'{a}x = {b} mod {p}')
 
     gcd = greatest_common_divider(a,p)
 
     print(f'НОД({a}, {p}) = {gcd}')
 
+    """Проверка на наличие решений"""
     if b % gcd != 0:
         return 'b не делится без остатка на НОД(a, p). Решений нет'
     else:
         print(f'b делится без остатка на НОД(a, p). Количество решений сравнения: {gcd}')
 
+    """Сокращение коэффициентов на НОД"""
     a = a // gcd
     b = b // gcd
     p = p // gcd
@@ -56,12 +61,14 @@ def solve_equasion(a, b, p):
 
     euler_p = euler(p)
 
+    """Нахождение нулевого корня и формирование результирующей строки"""
     x0 = int((math.pow(a, euler_p - 1) * b) % p)
 
     print(f'x0 = {a}^({euler_p} - 1) * {b} mod {p} = {x0}')
 
     res = f'Решения сравнения: {x0}'
 
+    """Нахождение остальных корней и прибавление к результирующей строке"""
     for i in range(1, gcd):
         x = x0 + i * p
         print(f'x{i} = {x0} + {i} * {p} = {x}')
